@@ -1,6 +1,6 @@
 FileVersion = 1
 
 [Project]
-Name = "LibClang"
+Name = "Clang-Beef"
 TargetType = "BeefLib"
 StartupObject = "LibClang.Program"
