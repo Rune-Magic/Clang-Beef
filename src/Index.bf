@@ -1106,28 +1106,11 @@ extension Clang
 	 */
 	CXXAccessSpecifier = 39,
 
-	/** An access specifier. 
-	 */
 	FirstDecl = UnexposedDecl,
-
-	/** An access specifier. 
-	 */
 	LastDecl = CXXAccessSpecifier,
-
-	/** An access specifier. 
-	 */
 	FirstRef = 40,
-
-	/** An access specifier. 
-	 */
 	ObjCSuperClassRef = 40,
-
-	/** An access specifier. 
-	 */
 	ObjCProtocolRef = 41,
-
-	/** An access specifier. 
-	 */
 	ObjCClassRef = 42,
 
 	/** A reference to a type declaration.
@@ -1144,18 +1127,6 @@ extension Clang
 	 */
 	TypeRef = 43,
 
-	/** A reference to a type declaration.
-	 *  A type reference occurs anywhere where a type is named but not
-	 *  declared. For example, given:
-	 *  
-	 *  ```
-	 *  typedef unsigned size_type;
-	 *  size_type size;
-	 *  ```
-	 *  The typedef is a declaration of size_type (CXCursor_TypedefDecl),
-	 *  while the type of the variable "size" is referenced. The cursor
-	 *  referenced by the type of size is the typedef for size_type.
-	 */
 	CXXBaseSpecifier = 44,
 
 	/** A reference to a class template, function template, template
@@ -1223,44 +1194,13 @@ extension Clang
 	 */
 	VariableRef = 50,
 
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	LastRef = VariableRef,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	FirstInvalid = 70,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	InvalidFile = 70,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	NoDeclFound = 71,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	NotImplemented = 72,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	InvalidCode = 73,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	LastInvalid = InvalidCode,
-
-	/** A reference to a variable that occurs in some non-expression
-	 *  context, e.g., a C++ lambda capture list.
-	 */
 	FirstExpr = 100,
 
 	/** An expression whose specific kind is not exposed via this
@@ -1561,12 +1501,7 @@ extension Clang
 	 */
 	PackIndexingExpr = 156,
 
-	/** Represents a C++26 pack indexing expression.
-	 */
 	LastExpr = PackIndexingExpr,
-
-	/** Represents a C++26 pack indexing expression.
-	 */
 	FirstStmt = 200,
 
 	/** A statement whose specific kind is not exposed via this
@@ -1648,8 +1583,6 @@ extension Clang
 	 */
 	GCCAsmStmt = 215,
 
-	/** A GCC inline assembly statement extension.
-	 */
 	AsmStmt = GCCAsmStmt,
 
 	/** Objective-C's overall @try- @catch- @finally statement. 
@@ -2030,8 +1963,6 @@ extension Clang
 	 */
 	OMPAssumeDirective = 309,
 
-	/** OpenMP assume directive.
-	 */
 	OMPStripeDirective = 310,
 
 	/** OpenACC Compute Construct.
@@ -2090,8 +2021,6 @@ extension Clang
 	 */
 	OpenACCCacheConstruct = 333,
 
-	/** OpenACC cache Construct.
-	 */
 	LastStmt = OpenACCCacheConstruct,
 
 	/** Cursor that represents the translation unit itself.
@@ -2100,10 +2029,6 @@ extension Clang
 	 */
 	TranslationUnit = 350,
 
-	/** Cursor that represents the translation unit itself.
-	 *  The translation unit cursor exists primarily to act as the root
-	 *  cursor for traversing the contents of a translation unit.
-	 */
 	FirstAttr = 400,
 
 	/** An attribute whose specific kind is not exposed via this
@@ -2111,257 +2036,60 @@ extension Clang
 	 */
 	UnexposedAttr = 400,
 
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	IBActionAttr = 401,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	IBOutletAttr = 402,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	IBOutletCollectionAttr = 403,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CXXFinalAttr = 404,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CXXOverrideAttr = 405,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	AnnotateAttr = 406,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	AsmLabelAttr = 407,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	PackedAttr = 408,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	PureAttr = 409,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ConstAttr = 410,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NoDuplicateAttr = 411,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CUDAConstantAttr = 412,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CUDADeviceAttr = 413,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CUDAGlobalAttr = 414,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CUDAHostAttr = 415,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	CUDASharedAttr = 416,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	VisibilityAttr = 417,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	DLLExport = 418,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	DLLImport = 419,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NSReturnsRetained = 420,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NSReturnsNotRetained = 421,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NSReturnsAutoreleased = 422,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NSConsumesSelf = 423,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NSConsumed = 424,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCException = 425,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCNSObject = 426,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCIndependentClass = 427,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCPreciseLifetime = 428,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCReturnsInnerPointer = 429,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCRequiresSuper = 430,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCRootClass = 431,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCSubclassingRestricted = 432,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCExplicitProtocolImpl = 433,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCDesignatedInitializer = 434,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCRuntimeVisible = 435,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCBoxable = 436,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	FlagEnum = 437,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ConvergentAttr = 438,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	WarnUnusedAttr = 439,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	WarnUnusedResultAttr = 440,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	AlignedAttr = 441,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LastAttr = AlignedAttr,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	PreprocessingDirective = 500,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	MacroDefinition = 501,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	MacroExpansion = 502,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	MacroInstantiation = MacroExpansion,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	InclusionDirective = 503,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	FirstPreprocessing = PreprocessingDirective,
-
-	/** An attribute whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LastPreprocessing = InclusionDirective,
 
 	/** A module import declaration.
 	 */
 	ModuleImportDecl = 600,
 
-	/** A module import declaration.
-	 */
 	TypeAliasTemplateDecl = 601,
 
 	/** A static_assert or _Static_assert node
@@ -2376,12 +2104,7 @@ extension Clang
 	 */
 	ConceptDecl = 604,
 
-	/** a concept declaration.
-	 */
 	FirstExtraDecl = ModuleImportDecl,
-
-	/** a concept declaration.
-	 */
 	LastExtraDecl = ConceptDecl,
 
 	/** A code completion overload candidate.
@@ -2881,304 +2604,65 @@ extension Clang
 	 */
 	Unexposed = 1,
 
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Void = 2,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Bool = 3,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Char_U = 4,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	UChar = 5,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Char16 = 6,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Char32 = 7,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	UShort = 8,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	UInt = 9,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ULong = 10,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ULongLong = 11,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	UInt128 = 12,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Char_S = 13,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	SChar = 14,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	WChar = 15,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Short = 16,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Int = 17,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Long = 18,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LongLong = 19,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Int128 = 20,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Float = 21,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Double = 22,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LongDouble = 23,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	NullPtr = 24,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Overload = 25,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Dependent = 26,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCId = 27,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCClass = 28,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCSel = 29,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Float128 = 30,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Half = 31,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Float16 = 32,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ShortAccum = 33,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Accum = 34,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LongAccum = 35,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	UShortAccum = 36,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	UAccum = 37,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ULongAccum = 38,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	BFloat16 = 39,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Ibm128 = 40,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	FirstBuiltin = Void,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LastBuiltin = Ibm128,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Complex = 100,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Pointer = 101,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	BlockPointer = 102,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	LValueReference = 103,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	RValueReference = 104,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Record = 105,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Enum = 106,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Typedef = 107,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCInterface = 108,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ObjCObjectPointer = 109,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	FunctionNoProto = 110,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	FunctionProto = 111,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	ConstantArray = 112,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Vector = 113,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	IncompleteArray = 114,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	VariableArray = 115,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	DependentSizedArray = 116,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	MemberPointer = 117,
-
-	/** A type whose specific kind is not exposed via this
-	 *  interface.
-	 */
 	Auto = 118,
 
 	/** Represents a type that was referred to using an elaborated type keyword.
@@ -3186,334 +2670,71 @@ extension Clang
 	 */
 	Elaborated = 119,
 
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	Pipe = 120,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dRO = 121,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dArrayRO = 122,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dBufferRO = 123,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dRO = 124,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayRO = 125,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dDepthRO = 126,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayDepthRO = 127,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dMSAARO = 128,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayMSAARO = 129,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dMSAADepthRO = 130,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayMSAADepthRO = 131,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage3dRO = 132,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dWO = 133,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dArrayWO = 134,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dBufferWO = 135,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dWO = 136,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayWO = 137,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dDepthWO = 138,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayDepthWO = 139,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dMSAAWO = 140,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayMSAAWO = 141,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dMSAADepthWO = 142,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayMSAADepthWO = 143,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage3dWO = 144,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dRW = 145,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dArrayRW = 146,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage1dBufferRW = 147,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dRW = 148,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayRW = 149,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dDepthRW = 150,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayDepthRW = 151,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dMSAARW = 152,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayMSAARW = 153,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dMSAADepthRW = 154,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage2dArrayMSAADepthRW = 155,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLImage3dRW = 156,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLSampler = 157,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLEvent = 158,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLQueue = 159,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLReserveID = 160,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	ObjCObject = 161,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	ObjCTypeParam = 162,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	Attributed = 163,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCMcePayload = 164,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImePayload = 165,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCRefPayload = 166,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCSicPayload = 167,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCMceResult = 168,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeResult = 169,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCRefResult = 170,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCSicResult = 171,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeResultSingleReferenceStreamout = 172,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeResultDualReferenceStreamout = 173,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeSingleReferenceStreamin = 174,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeDualReferenceStreamin = 175,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeResultSingleRefStreamout = 172,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeResultDualRefStreamout = 173,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeSingleRefStreamin = 174,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	OCLIntelSubgroupAVCImeDualRefStreamin = 175,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	ExtVector = 176,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	Atomic = 177,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	BTFTagAttributed = 178,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	HLSLResource = 179,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	HLSLAttributedResource = 180,
-
-	/** Represents a type that was referred to using an elaborated type keyword.
-	 *  E.g., struct S, or via a qualified name, e.g., N::M::type, or both.
-	 */
 	HLSLInlineSpirv = 181,
 }
 
@@ -6713,8 +5934,6 @@ extension Clang
 	 */
 	PtrMemD = 1,
 
-	/** C++ Pointer - to - member operator. 
-	 */
 	PtrMemI = 2,
 
 	/** Multiplication operator. 
@@ -6841,8 +6060,6 @@ extension Clang
 	 */
 	Comma = 33,
 
-	/** Comma operator. 
-	 */
 	Last = Comma,
 }
 
