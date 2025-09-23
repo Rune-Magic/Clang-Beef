@@ -29,7 +29,7 @@ class CXCompileCommand { private this() {} }
 
 /** Error codes for Compilation Database
  */
-[CRepr, AllowDuplicates] enum CXCompilationDatabase_Error : c_int
+[AllowDuplicates] enum CXCompilationDatabase_Error : c_int
 {
 	NoError = 0,
 	CanNotLoadDatabase = 1,

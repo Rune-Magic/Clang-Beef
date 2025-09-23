@@ -10,7 +10,7 @@ namespace LibClang;
 /** Error codes returned by libclang routines.
  *  Zero (@c CXError_Success) is the only error code indicating success.  Other error codes, including not yet assigned non-zero values, indicate errors.
  */
-[CRepr, AllowDuplicates] enum CXErrorCode : c_int
+[AllowDuplicates] enum CXErrorCode : c_int
 {
 	/** No error.
 	 */

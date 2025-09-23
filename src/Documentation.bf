@@ -27,7 +27,7 @@ extension Clang
 /** Describes the type of the comment AST node (@c CXComment). A comment node can be considered block content (e. g., paragraph), inline content
  *  (plain text) or neither (the root AST node).
  */
-[CRepr, AllowDuplicates] enum CXCommentKind : c_int
+[AllowDuplicates] enum CXCommentKind : c_int
 {
 	/** Null comment.  No AST node is constructed at the requested location
 	 *  because there is no text or a syntax error.
@@ -116,7 +116,7 @@ extension Clang
 /** The most appropriate rendering mode for an inline command, chosen on
  *  command semantics in Doxygen.
  */
-[CRepr, AllowDuplicates] enum CXCommentInlineCommandRenderKind : c_int
+[AllowDuplicates] enum CXCommentInlineCommandRenderKind : c_int
 {
 	/** Command argument should be rendered in a normal font.
 	 */
@@ -142,7 +142,7 @@ extension Clang
 
 /** Describes parameter passing direction for @param or  @arg command. 
  */
-[CRepr, AllowDuplicates] enum CXCommentParamPassDirection : c_int
+[AllowDuplicates] enum CXCommentParamPassDirection : c_int
 {
 	/** The parameter is an input parameter.
 	 */

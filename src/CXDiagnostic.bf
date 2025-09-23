@@ -9,7 +9,7 @@ namespace LibClang;
 
 /** Describes the severity of a particular diagnostic.
  */
-[CRepr, AllowDuplicates] enum CXDiagnosticSeverity : c_int
+[AllowDuplicates] enum CXDiagnosticSeverity : c_int
 {
 	/** A diagnostic that has been suppressed, e.g., by a command-line
 	 *  option.
@@ -67,7 +67,7 @@ extension Clang
 /** Describes the kind of error that occurred (if any) in a call to
  *  @c clang_loadDiagnostics.  
  */
-[CRepr, AllowDuplicates] enum CXLoadDiag_Error : c_int
+[AllowDuplicates] enum CXLoadDiag_Error : c_int
 {
 	/** Indicates that no error occurred.
 	 */
@@ -126,7 +126,7 @@ extension Clang
  *  The values in this enum are meant to be combined to customize the
  *  behavior of @c clang_formatDiagnostic().  
  */
-[CRepr, AllowDuplicates] enum CXDiagnosticDisplayOptions : c_int
+[AllowDuplicates] enum CXDiagnosticDisplayOptions : c_int
 {
 	/** Display the source-location information where the
 	 *  diagnostic was located.

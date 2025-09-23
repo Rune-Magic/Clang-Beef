@@ -11,6 +11,8 @@ static
 {
 	public const c_int CINDEX_VERSION_MAJOR = 0;
 	public const c_int CINDEX_VERSION_MINOR = 64;
+	public const let CINDEX_VERSION = CINDEX_VERSION_ENCODE(CINDEX_VERSION_MAJOR, CINDEX_VERSION_MINOR);
+	public const let CINDEX_VERSION_STRING = CINDEX_VERSION_STRINGIZE(CINDEX_VERSION_MAJOR, CINDEX_VERSION_MINOR);
 }
 
 /** An "index" that consists of a set of translation units that would
@@ -57,7 +59,7 @@ typealias CXClientData = void*;
  *  whether the use of this entity will result in a warning or error due to
  *  it being deprecated or unavailable.
  */
-[CRepr, AllowDuplicates] enum CXAvailabilityKind : c_int
+[AllowDuplicates] enum CXAvailabilityKind : c_int
 {
 	/** The entity is available.
 	 */
@@ -103,7 +105,7 @@ typealias CXClientData = void*;
 /** Describes the exception specification of a cursor.
  *  A negative value indicates that the cursor is not a function declaration.
  */
-[CRepr, AllowDuplicates] enum CXCursor_ExceptionSpecificationKind : c_int
+[AllowDuplicates] enum CXCursor_ExceptionSpecificationKind : c_int
 {
 	/** The cursor has no exception specification.
 	 */
@@ -192,7 +194,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_disposeIndex")] public static extern void DisposeIndex(CXIndex index);
 }
 
-[CRepr, AllowDuplicates] enum CXChoice : c_int
+[AllowDuplicates] enum CXChoice : c_int
 {
 	/** Use the default value of an option that may depend on the process
 	 *  environment.
@@ -208,7 +210,7 @@ extension Clang
 	Disabled = 2,
 }
 
-[CRepr, AllowDuplicates] enum CXGlobalOptFlags : c_int
+[AllowDuplicates] enum CXGlobalOptFlags : c_int
 {
 	/** Used to indicate that no special CXIndex options are needed.
 	 */
@@ -537,7 +539,7 @@ extension Clang
  *  ORed together to specify which options should be used when
  *  constructing the translation unit.
  */
-[CRepr, AllowDuplicates] enum CXTranslationUnit_Flags : c_int
+[AllowDuplicates] enum CXTranslationUnit_Flags : c_int
 {
 	/** Used to indicate that no special translation-unit options are
 	 *  needed.
@@ -725,7 +727,7 @@ extension Clang
  *  ORed together to specify which options should be used when
  *  saving the translation unit.
  */
-[CRepr, AllowDuplicates] enum CXSaveTranslationUnit_Flags : c_int
+[AllowDuplicates] enum CXSaveTranslationUnit_Flags : c_int
 {
 	/** Used to indicate that no special saving options are needed.
 	 */
@@ -746,7 +748,7 @@ extension Clang
 /** Describes the kind of error that occurred (if any) in a call to
  *  @c clang_saveTranslationUnit().  
  */
-[CRepr, AllowDuplicates] enum CXSaveError : c_int
+[AllowDuplicates] enum CXSaveError : c_int
 {
 	/** Indicates that no error occurred while saving a translation unit.
 	 */
@@ -812,7 +814,7 @@ extension Clang
  *  ORed together to specify which options should be used when
  *  reparsing the translation unit.
  */
-[CRepr, AllowDuplicates] enum CXReparse_Flags : c_int
+[AllowDuplicates] enum CXReparse_Flags : c_int
 {
 	/** Used to indicate that no special reparsing options are needed.
 	 */
@@ -866,7 +868,7 @@ extension Clang
 
 /** Categorizes how memory is being used by a translation unit.
  */
-[CRepr, AllowDuplicates] enum CXTUResourceUsageKind : c_int
+[AllowDuplicates] enum CXTUResourceUsageKind : c_int
 {
 	AST = 1,
 	Identifiers = 2,
@@ -942,7 +944,7 @@ extension Clang
 
 /** Describes the kind of entity that a cursor refers to.
  */
-[CRepr, AllowDuplicates] enum CXCursorKind : c_int
+[AllowDuplicates] enum CXCursorKind : c_int
 {
 	/** A declaration whose specific kind is not exposed via this
 	 *  interface.
@@ -2223,7 +2225,7 @@ extension Clang
 
 /** Describe the linkage of the entity referred to by a cursor.
  */
-[CRepr, AllowDuplicates] enum CXLinkageKind : c_int
+[AllowDuplicates] enum CXLinkageKind : c_int
 {
 	/** This value indicates that no linkage information is available
 	 *  for a provided CXCursor. 
@@ -2256,7 +2258,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_getCursorLinkage")] public static extern CXLinkageKind GetCursorLinkage(CXCursor cursor);
 }
 
-[CRepr, AllowDuplicates] enum CXVisibilityKind : c_int
+[AllowDuplicates] enum CXVisibilityKind : c_int
 {
 	/** This value indicates that no visibility information is available
 	 *  for a provided CXCursor. 
@@ -2394,7 +2396,7 @@ extension Clang
 
 /** Describe the "language" of the entity referred to by a cursor.
  */
-[CRepr, AllowDuplicates] enum CXLanguageKind : c_int
+[AllowDuplicates] enum CXLanguageKind : c_int
 {
 	Invalid = 0,
 	C = 1,
@@ -2412,7 +2414,7 @@ extension Clang
 /** Describe the "thread-local storage (TLS) kind" of the declaration
  *  referred to by a cursor.
  */
-[CRepr, AllowDuplicates] enum CXTLSKind : c_int
+[AllowDuplicates] enum CXTLSKind : c_int
 {
 	None = 0,
 	Dynamic = 1,
@@ -2593,7 +2595,7 @@ extension Clang
 
 /** Describes the kind of type
  */
-[CRepr, AllowDuplicates] enum CXTypeKind : c_int
+[AllowDuplicates] enum CXTypeKind : c_int
 {
 	/** Represents an invalid type (e.g., where no type is available).
 	 */
@@ -2740,7 +2742,7 @@ extension Clang
 
 /** Describes the calling convention of a function type
  */
-[CRepr, AllowDuplicates] enum CXCallingConv : c_int
+[AllowDuplicates] enum CXCallingConv : c_int
 {
 	Default = 0,
 	C = 1,
@@ -2870,7 +2872,7 @@ extension Clang
  *  See the definition of llvm::clang::TemplateArgument::ArgKind for full
  *  element descriptions.
  */
-[CRepr, AllowDuplicates] enum CXTemplateArgumentKind : c_int
+[AllowDuplicates] enum CXTemplateArgumentKind : c_int
 {
 	Null = 0,
 	Type = 1,
@@ -3205,7 +3207,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_Type_isTransparentTagTypedef")] public static extern c_uint Type_IsTransparentTagTypedef(CXType T);
 }
 
-[CRepr, AllowDuplicates] enum CXTypeNullabilityKind : c_int
+[AllowDuplicates] enum CXTypeNullabilityKind : c_int
 {
 	/** Values of this type can never be null.
 	 */
@@ -3244,7 +3246,7 @@ extension Clang
 /** List the possible error codes for @c clang_Type_getSizeOf,  @c clang_Type_getAlignOf,  @c clang_Type_getOffsetOf,  @c clang_Cursor_getOffsetOf, and  @c clang_getOffsetOfBase. 
  *  A value of this enumeration type can be returned if the target type is not a valid argument to sizeof, alignof or offsetof.
  */
-[CRepr, AllowDuplicates] enum CXTypeLayoutError : c_int
+[AllowDuplicates] enum CXTypeLayoutError : c_int
 {
 	/** Type is of kind CXType_Invalid.
 	 */
@@ -3351,7 +3353,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_Cursor_isInlineNamespace")] public static extern c_uint Cursor_IsInlineNamespace(CXCursor C);
 }
 
-[CRepr, AllowDuplicates] enum CXRefQualifierKind : c_int
+[AllowDuplicates] enum CXRefQualifierKind : c_int
 {
 	/** No ref-qualifier was provided. 
 	 */
@@ -3402,7 +3404,7 @@ extension Clang
 /** Represents the C++ access control level to a base class for a
  *  cursor with kind CX_CXXBaseSpecifier.
  */
-[CRepr, AllowDuplicates] enum CX_CXXAccessSpecifier : c_int
+[AllowDuplicates] enum CX_CXXAccessSpecifier : c_int
 {
 	InvalidAccessSpecifier = 0,
 	Public = 1,
@@ -3423,7 +3425,7 @@ extension Clang
 /** Represents the storage classes as declared in the source. CX_SC_Invalid
  *  was added for the case that the passed cursor in not a declaration.
  */
-[CRepr, AllowDuplicates] enum CX_StorageClass : c_int
+[AllowDuplicates] enum CX_StorageClass : c_int
 {
 	C_Invalid = 0,
 	C_None = 1,
@@ -3437,7 +3439,7 @@ extension Clang
 
 /** Represents a specific kind of binary operator which can appear at a cursor.
  */
-[CRepr, AllowDuplicates] enum CX_BinaryOperatorKind : c_int
+[AllowDuplicates] enum CX_BinaryOperatorKind : c_int
 {
 	O_Invalid = 0,
 	O_PtrMemD = 1,
@@ -3533,7 +3535,7 @@ extension Clang
  *  A value of this enumeration type should be returned by each
  *  @c CXCursorVisitor to indicate how clang_visitChildren() proceed. 
  */
-[CRepr, AllowDuplicates] enum CXChildVisitResult : c_int
+[AllowDuplicates] enum CXChildVisitResult : c_int
 {
 	/** Terminates the cursor traversal.
 	 */
@@ -3654,7 +3656,7 @@ class CXPrintingPolicy { private this() {} }
 /** Properties for the printing policy.
  *  See @c clang::PrintingPolicy for more information. 
  */
-[CRepr, AllowDuplicates] enum CXPrintingPolicyProperty : c_int
+[AllowDuplicates] enum CXPrintingPolicyProperty : c_int
 {
 	Indentation = 0,
 	SuppressSpecifiers = 1,
@@ -3829,7 +3831,7 @@ extension Clang
 
 /** Property attributes for a @c CXCursor_ObjCPropertyDecl.  
  */
-[CRepr, AllowDuplicates] enum CXObjCPropertyAttrKind : c_int
+[AllowDuplicates] enum CXObjCPropertyAttrKind : c_int
 {
 	noattr = 0x00,
 	@readonly = 0x01,
@@ -3871,7 +3873,7 @@ extension Clang
 /** 'Qualifiers' written next to the return and parameter types in
  *  Objective-C method declarations.
  */
-[CRepr, AllowDuplicates] enum CXObjCDeclQualifierKind : c_int
+[AllowDuplicates] enum CXObjCDeclQualifierKind : c_int
 {
 	None = 0x0,
 	In = 0x1,
@@ -4319,7 +4321,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_getCursorReferenceNameRange")] public static extern CXSourceRange GetCursorReferenceNameRange(CXCursor C, c_uint NameFlags, c_uint PieceIndex);
 }
 
-[CRepr, AllowDuplicates] enum CXNameRefFlags : c_int
+[AllowDuplicates] enum CXNameRefFlags : c_int
 {
 	/** Include the nested-name-specifier, e.g. Foo:: in x.Foo::y, in the
 	 *  range.
@@ -4350,7 +4352,7 @@ extension Clang
 
 /** Describes a kind of token.
  */
-[CRepr, AllowDuplicates] enum CXTokenKind : c_int
+[AllowDuplicates] enum CXTokenKind : c_int
 {
 	/** A token that contains some kind of punctuation.
 	 */
@@ -4509,7 +4511,7 @@ class CXCompletionString { private this() {} }
  *  Each "chunk" within a code-completion string (@c CXCompletionString) is either a piece of text with a specific "kind" that describes how that text
  *  should be interpreted by the client or is another completion string.
  */
-[CRepr, AllowDuplicates] enum CXCompletionChunkKind : c_int
+[AllowDuplicates] enum CXCompletionChunkKind : c_int
 {
 	/** A code-completion string that describes "optional" text that
 	 *  could be a part of the template (but is not required).
@@ -4855,7 +4857,7 @@ extension Clang
  *  The enumerators in this enumeration can be bitwise-OR'd together to
  *  provide multiple options to @c clang_codeCompleteAt().  
  */
-[CRepr, AllowDuplicates] enum CXCodeComplete_Flags : c_int
+[AllowDuplicates] enum CXCodeComplete_Flags : c_int
 {
 	/** Whether to include macros within the set of code
 	 *  completions returned.
@@ -4888,7 +4890,7 @@ extension Clang
  *  The enumerators in this enumeration may be bitwise-OR'd together if multiple
  *  contexts are occurring simultaneously.
  */
-[CRepr, AllowDuplicates] enum CXCompletionContext : c_int
+[AllowDuplicates] enum CXCompletionContext : c_int
 {
 	/** The context for completions is unexposed, as only Clang results
 	 *  should be included. (This is equivalent to having no context bits set.)
@@ -5187,7 +5189,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_getInclusions")] public static extern void GetInclusions(CXTranslationUnit tu, CXInclusionVisitor visitor, CXClientData client_data);
 }
 
-[CRepr, AllowDuplicates] enum CXEvalResultKind : c_int
+[AllowDuplicates] enum CXEvalResultKind : c_int
 {
 	Int = 1,
 	Float = 2,
@@ -5257,7 +5259,7 @@ extension Clang
  *   CINDEX_HIGH Higher level API functions
  *  @{ 
  */
-[CRepr, AllowDuplicates] enum CXVisitorResult : c_int
+[AllowDuplicates] enum CXVisitorResult : c_int
 {
 	Break = 0,
 	Continue = 1,
@@ -5269,7 +5271,7 @@ extension Clang
 	public function CXVisitorResult(void*, CXCursor, CXSourceRange) visit;
 }
 
-[CRepr, AllowDuplicates] enum CXResult : c_int
+[AllowDuplicates] enum CXResult : c_int
 {
 	/** Function returned successfully.
 	 */
@@ -5410,7 +5412,7 @@ class CXIdxClientASTFile { private this() {} }
 	public c_int isImplicit;
 }
 
-[CRepr, AllowDuplicates] enum CXIdxEntityKind : c_int
+[AllowDuplicates] enum CXIdxEntityKind : c_int
 {
 	Unexposed = 0,
 	Typedef = 1,
@@ -5442,7 +5444,7 @@ class CXIdxClientASTFile { private this() {} }
 	CXXConcept = 27,
 }
 
-[CRepr, AllowDuplicates] enum CXIdxEntityLanguage : c_int
+[AllowDuplicates] enum CXIdxEntityLanguage : c_int
 {
 	None = 0,
 	C = 1,
@@ -5460,7 +5462,7 @@ class CXIdxClientASTFile { private this() {} }
  *  CXIdxEntity_CXXConversionFunction
  *  CXIdxEntity_CXXTypeAlias
  */
-[CRepr, AllowDuplicates] enum CXIdxEntityCXXTemplateKind : c_int
+[AllowDuplicates] enum CXIdxEntityCXXTemplateKind : c_int
 {
 	NonTemplate = 0,
 	Template = 1,
@@ -5468,7 +5470,7 @@ class CXIdxClientASTFile { private this() {} }
 	TemplateSpecialization = 3,
 }
 
-[CRepr, AllowDuplicates] enum CXIdxAttrKind : c_int
+[AllowDuplicates] enum CXIdxAttrKind : c_int
 {
 	Unexposed = 0,
 	IBAction = 1,
@@ -5508,7 +5510,7 @@ class CXIdxClientASTFile { private this() {} }
 	public CXIdxLoc classLoc;
 }
 
-[CRepr, AllowDuplicates] enum CXIdxDeclInfoFlags : c_int
+[AllowDuplicates] enum CXIdxDeclInfoFlags : c_int
 {
 	Flag_Skipped = 0x1,
 }
@@ -5540,7 +5542,7 @@ class CXIdxClientASTFile { private this() {} }
 	public c_uint flags;
 }
 
-[CRepr, AllowDuplicates] enum CXIdxObjCContainerKind : c_int
+[AllowDuplicates] enum CXIdxObjCContainerKind : c_int
 {
 	ForwardRef = 0,
 	Interface = 1,
@@ -5607,7 +5609,7 @@ class CXIdxClientASTFile { private this() {} }
  *  This may be deprecated in a future version as this duplicates
  *  the @c CXSymbolRole_Implicit bit in  @c CXSymbolRole.  
  */
-[CRepr, AllowDuplicates] enum CXIdxEntityRefKind : c_int
+[AllowDuplicates] enum CXIdxEntityRefKind : c_int
 {
 	/** The entity is referenced directly in user's code.
 	 */
@@ -5623,7 +5625,7 @@ class CXIdxClientASTFile { private this() {} }
  *  Internal: this currently mirrors low 9 bits of clang::index::SymbolRole with
  *  higher bits zeroed. These high bits may be exposed in the future.
  */
-[CRepr, AllowDuplicates] enum CXSymbolRole : c_int
+[AllowDuplicates] enum CXSymbolRole : c_int
 {
 	None = 0,
 	Declaration = 1 << 0,
@@ -5767,7 +5769,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_IndexAction_dispose")] public static extern void IndexAction_Dispose(CXIndexAction);
 }
 
-[CRepr, AllowDuplicates] enum CXIndexOptFlags : c_int
+[AllowDuplicates] enum CXIndexOptFlags : c_int
 {
 	/** Used to indicate that no special indexing options are needed.
 	 */
@@ -5924,7 +5926,7 @@ extension Clang
 
 /** Describes the kind of binary operators.
  */
-[CRepr, AllowDuplicates] enum CXBinaryOperatorKind : c_int
+[AllowDuplicates] enum CXBinaryOperatorKind : c_int
 {
 	/** This value describes cursors which are not binary operators. 
 	 */
@@ -6077,7 +6079,7 @@ extension Clang
 
 /** Describes the kind of unary operators.
  */
-[CRepr, AllowDuplicates] enum CXUnaryOperatorKind : c_int
+[AllowDuplicates] enum CXUnaryOperatorKind : c_int
 {
 	/** This value describes cursors which are not unary operators. 
 	 */
