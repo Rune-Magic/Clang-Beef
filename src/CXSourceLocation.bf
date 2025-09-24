@@ -9,6 +9,7 @@ namespace LibClang;
 
 /** Identifies a specific source location within a translation
  *  unit.
+ *  
  *  Use clang_getExpansionLocation() or clang_getSpellingLocation()
  *  to map a source location to a particular file, line, and column.
  */
@@ -19,6 +20,7 @@ namespace LibClang;
 }
 
 /** Identifies a half-open character range in the source code.
+ *  
  *  Use clang_getRangeStart() and clang_getRangeEnd() to retrieve the
  *  starting and end locations from a source range, respectively.
  */
@@ -40,7 +42,7 @@ extension Clang
 	 *  code.
 	 *  
 	 *  @returns non-zero if the source locations refer to the same location, zero
-	 *  if they refer to different locations.
+	 *           if they refer to different locations.
 	 */
 	[Import(Clang.dll), LinkName("clang_equalLocations")] public static extern c_uint EqualLocations(CXSourceLocation loc1, CXSourceLocation loc2);
 
@@ -48,7 +50,7 @@ extension Clang
 	 *  strictly before the second one in the source code.
 	 *  
 	 *  @returns non-zero if the first source location comes
-	 *  strictly before the second one, zero otherwise.
+	 *           strictly before the second one, zero otherwise.
 	 */
 	[Import(Clang.dll), LinkName("clang_isBeforeInTranslationUnit")] public static extern c_uint IsBeforeInTranslationUnit(CXSourceLocation loc1, CXSourceLocation loc2);
 
@@ -76,69 +78,78 @@ extension Clang
 	 */
 	[Import(Clang.dll), LinkName("clang_equalRanges")] public static extern c_uint EqualRanges(CXSourceRange range1, CXSourceRange range2);
 
-	/** Returns non-zero if @p range is null. 
+	/** Returns non-zero if @p range is null.
 	 */
 	[Import(Clang.dll), LinkName("clang_Range_isNull")] public static extern c_int Range_IsNull(CXSourceRange range);
 
 	/** Retrieve the file, line, column, and offset represented by
 	 *  the given source location.
+	 *  
 	 *  If the location refers into a macro expansion, retrieves the
 	 *  location of the macro expansion.
 	 *  
 	 *  @param location the location within a source file that will be decomposed
-	 *  into its parts.
+	 *                  into its parts.
 	 *  
 	 *  @param file [out] if non-NULL, will be set to the file to which the given
-	 *  source location points.
+	 *              source location points.
 	 *  
 	 *  @param line [out] if non-NULL, will be set to the line to which the given
-	 *  source location points.
+	 *              source location points.
 	 *  
 	 *  @param column [out] if non-NULL, will be set to the column to which the given
-	 *  source location points.
+	 *                source location points.
 	 *  
 	 *  @param offset [out] if non-NULL, will be set to the offset into the
-	 *  buffer to which the given source location points.
+	 *                buffer to which the given source location points.
 	 */
 	[Import(Clang.dll), LinkName("clang_getExpansionLocation")] public static extern void GetExpansionLocation(CXSourceLocation location, out CXFile file, out c_uint line, out c_uint column, out c_uint offset);
 
 	/** Retrieve the file, line and column represented by the given source
 	 *  location, as specified in a # line directive.
+	 *  
 	 *  Example: given the following source code in a file somefile.c
 	 *  
-	 *  ```
-	 *  #123 "dummy.c" 1
 	 *  
-	 *  static int func(void)
-	 *  {
-	 *    return 0;
-	 *  }
 	 *  ```
+	 *   #123 "dummy.c" 1
+	 *  
+	 *   static int func(void)
+	 *   {
+	 *       return 0;
+	 *   }
+	 *  ```
+	 *  
 	 *  the location information returned by this function would be
+	 *  
 	 *  File: dummy.c Line: 124 Column: 12
+	 *  
 	 *  whereas clang_getExpansionLocation would have returned
+	 *  
 	 *  File: somefile.c Line: 3 Column: 12
 	 *  
 	 *  @param location the location within a source file that will be decomposed
-	 *  into its parts.
+	 *                  into its parts.
 	 *  
 	 *  @param filename [out] if non-NULL, will be set to the filename of the
-	 *  source location. Note that filenames returned will be for "virtual" files,
-	 *  which don't necessarily exist on the machine running clang - e.g. when
-	 *  parsing preprocessed output obtained from a different environment. If
-	 *  a non-NULL value is passed in, remember to dispose of the returned value
-	 *  using @c clang_disposeString() once you've finished with it. For an invalid source location, an empty string is returned.
+	 *                  source location. Note that filenames returned will be for "virtual" files,
+	 *                  which don't necessarily exist on the machine running clang - e.g. when
+	 *                  parsing preprocessed output obtained from a different environment. If
+	 *                  a non-NULL value is passed in, remember to dispose of the returned value
+	 *                  using @c clang_disposeString() once you've finished with it. For an invalid
+	 *                  source location, an empty string is returned.
 	 *  
 	 *  @param line [out] if non-NULL, will be set to the line number of the
-	 *  source location. For an invalid source location, zero is returned.
+	 *              source location. For an invalid source location, zero is returned.
 	 *  
 	 *  @param column [out] if non-NULL, will be set to the column number of the
-	 *  source location. For an invalid source location, zero is returned.
+	 *                source location. For an invalid source location, zero is returned.
 	 */
 	[Import(Clang.dll), LinkName("clang_getPresumedLocation")] public static extern void GetPresumedLocation(CXSourceLocation location, out CXString filename, out c_uint line, out c_uint column);
 
 	/** Legacy API to retrieve the file, line, column, and offset represented
 	 *  by the given source location.
+	 *  
 	 *  This interface has been replaced by the newer interface
 	 *  #clang_getExpansionLocation(). See that interface's documentation for
 	 *  details.
@@ -147,46 +158,48 @@ extension Clang
 
 	/** Retrieve the file, line, column, and offset represented by
 	 *  the given source location.
+	 *  
 	 *  If the location refers into a macro instantiation, return where the
 	 *  location was originally spelled in the source file.
 	 *  
 	 *  @param location the location within a source file that will be decomposed
-	 *  into its parts.
+	 *                  into its parts.
 	 *  
 	 *  @param file [out] if non-NULL, will be set to the file to which the given
-	 *  source location points.
+	 *              source location points.
 	 *  
 	 *  @param line [out] if non-NULL, will be set to the line to which the given
-	 *  source location points.
+	 *              source location points.
 	 *  
 	 *  @param column [out] if non-NULL, will be set to the column to which the given
-	 *  source location points.
+	 *                source location points.
 	 *  
 	 *  @param offset [out] if non-NULL, will be set to the offset into the
-	 *  buffer to which the given source location points.
+	 *                buffer to which the given source location points.
 	 */
 	[Import(Clang.dll), LinkName("clang_getSpellingLocation")] public static extern void GetSpellingLocation(CXSourceLocation location, out CXFile file, out c_uint line, out c_uint column, out c_uint offset);
 
 	/** Retrieve the file, line, column, and offset represented by
 	 *  the given source location.
+	 *  
 	 *  If the location refers into a macro expansion, return where the macro was
 	 *  expanded or where the macro argument was written, if the location points at
 	 *  a macro argument.
 	 *  
 	 *  @param location the location within a source file that will be decomposed
-	 *  into its parts.
+	 *                  into its parts.
 	 *  
 	 *  @param file [out] if non-NULL, will be set to the file to which the given
-	 *  source location points.
+	 *              source location points.
 	 *  
 	 *  @param line [out] if non-NULL, will be set to the line to which the given
-	 *  source location points.
+	 *              source location points.
 	 *  
 	 *  @param column [out] if non-NULL, will be set to the column to which the given
-	 *  source location points.
+	 *                source location points.
 	 *  
 	 *  @param offset [out] if non-NULL, will be set to the offset into the
-	 *  buffer to which the given source location points.
+	 *                buffer to which the given source location points.
 	 */
 	[Import(Clang.dll), LinkName("clang_getFileLocation")] public static extern void GetFileLocation(CXSourceLocation location, out CXFile file, out c_uint line, out c_uint column, out c_uint offset);
 
@@ -205,19 +218,19 @@ extension Clang
  */
 [CRepr] struct CXSourceRangeList
 {
-	/** The number of ranges in the @c ranges array.  
+	/** The number of ranges in the @c ranges array.
 	 */
 	public c_uint count;
 
-	/** An array of @c CXSourceRanges.  
+	/** An array of @c CXSourceRanges. 
 	 */
 	public CXSourceRange* ranges;
 }
 
 extension Clang
 {
-	/** Destroy the given @c CXSourceRangeList.  
+	/** Destroy the given @c CXSourceRangeList. 
 	 */
 	[Import(Clang.dll), LinkName("clang_disposeSourceRangeList")] public static extern void DisposeSourceRangeList(CXSourceRangeList* ranges);
-
 }
+

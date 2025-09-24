@@ -19,5 +19,5 @@ extension Clang
 	 *  message to stderr and call exit(1).
 	 */
 	[Import(Clang.dll), LinkName("clang_uninstall_llvm_fatal_error_handler")] public static extern void Uninstall_Llvm_Fatal_Error_Handler();
-
 }
+

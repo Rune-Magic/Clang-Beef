@@ -40,5 +40,5 @@ extension Clang
 	/** Free the given CXRewriter.
 	 */
 	[Import(Clang.dll), LinkName("clang_CXRewriter_dispose")] public static extern void CXRewriter_Dispose(CXRewriter Rew);
-
 }
+

@@ -8,7 +8,9 @@ using System.Interop;
 namespace LibClang;
 
 /** Error codes returned by libclang routines.
- *  Zero (@c CXError_Success) is the only error code indicating success.  Other error codes, including not yet assigned non-zero values, indicate errors.
+ *  
+ *  Zero (@c CXError_Success) is the only error code indicating success.  Other
+ *  error codes, including not yet assigned non-zero values, indicate errors.
  */
 [AllowDuplicates] enum CXErrorCode : c_int
 {
@@ -17,6 +19,7 @@ namespace LibClang;
 	Success = 0,
 
 	/** A generic error code, no further details are available.
+	 *  
 	 *  Errors of this kind can get their own specific error codes in future
 	 *  libclang versions.
 	 */

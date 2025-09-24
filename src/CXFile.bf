@@ -32,24 +32,24 @@ extension Clang
 
 extension Clang
 {
-	/** Retrieve the unique ID for the given @c file. 
-	 *   
+	/** Retrieve the unique ID for the given @c file.
+	 *  
 	 *  @param file the file to get the ID for.
-	 *  
-	 *  @param outID stores the returned CXFileUniqueID.
-	 *  
-	 *  @returns If there was a failure getting the unique ID, returns non-zero,
-	 *  otherwise returns 0.
+	 *              @param outID stores the returned CXFileUniqueID.
+	 *               @returns If there was a failure getting the unique ID, returns non-zero,
+	 *           otherwise returns 0.
 	 */
 	[Import(Clang.dll), LinkName("clang_getFileUniqueID")] public static extern c_int GetFileUniqueID(CXFile file, CXFileUniqueID* outID);
 
-	/** Returns non-zero if the @c file1 and  @c file2 point to the same file, or they are both NULL.
+	/** Returns non-zero if the @c file1 and @c file2 point to the same file,
+	 *  or they are both NULL.
 	 */
 	[Import(Clang.dll), LinkName("clang_File_isEqual")] public static extern c_int File_IsEqual(CXFile file1, CXFile file2);
 
-	/** Returns the real path name of @c file. 
-	 *  An empty string may be returned. Use  @c clang_getFileName() in that case. 
+	/** Returns the real path name of @c file.
+	 *  
+	 *  An empty string may be returned. Use @c clang_getFileName() in that case.
 	 */
 	[Import(Clang.dll), LinkName("clang_File_tryGetRealPathName")] public static extern CXString File_TryGetRealPathName(CXFile file);
-
 }
+

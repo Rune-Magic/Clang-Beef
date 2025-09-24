@@ -8,8 +8,11 @@ using System.Interop;
 namespace LibClang;
 
 /** A character string.
- *  The @c CXString type is used to return strings from the interface when the ownership of that string might differ from one call to the next.
- *  Use @c clang_getCString() to retrieve the string data and, once finished with the string data, call @c clang_disposeString() to free the string. 
+ *  
+ *  The @c CXString type is used to return strings from the interface when
+ *  the ownership of that string might differ from one call to the next.
+ *  Use @c clang_getCString() to retrieve the string data and, once finished
+ *  with the string data, call @c clang_disposeString() to free the string.
  */
 [CRepr] struct CXString
 {
@@ -26,6 +29,7 @@ namespace LibClang;
 extension Clang
 {
 	/** Retrieve the character data associated with the given string.
+	 *  
 	 *  The returned data is a reference and not owned by the user. This data
 	 *  is only valid while the `CXString` is valid. This function is similar
 	 *  to `std::string::c_str()`.
@@ -39,5 +43,5 @@ extension Clang
 	/** Free the given string set.
 	 */
 	[Import(Clang.dll), LinkName("clang_disposeStringSet")] public static extern void DisposeStringSet(CXStringSet* set);
-
 }
+

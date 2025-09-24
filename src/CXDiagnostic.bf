@@ -55,17 +55,16 @@ extension Clang
 	/** Retrieve a diagnostic associated with the given CXDiagnosticSet.
 	 *  
 	 *  @param Diags the CXDiagnosticSet to query.
-	 *  
-	 *  @param Index the zero-based diagnostic number to retrieve.
+	 *               @param Index the zero-based diagnostic number to retrieve.
 	 *  
 	 *  @returns the requested diagnostic. This diagnostic must be freed
-	 *  via a call to @c clang_disposeDiagnostic().  
+	 *           via a call to @c clang_disposeDiagnostic(). 
 	 */
 	[Import(Clang.dll), LinkName("clang_getDiagnosticInSet")] public static extern CXDiagnostic GetDiagnosticInSet(CXDiagnosticSet Diags, c_uint Index);
 }
 
 /** Describes the kind of error that occurred (if any) in a call to
- *  @c clang_loadDiagnostics.  
+ *   @c clang_loadDiagnostics. 
  */
 [AllowDuplicates] enum CXLoadDiag_Error : c_int
 {
@@ -95,15 +94,13 @@ extension Clang
 	 *  file.
 	 *  
 	 *  @param file The name of the file to deserialize.
-	 *  
-	 *  @param error A pointer to a enum value recording if there was a problem
-	 *  deserializing the diagnostics.
-	 *  
-	 *  @param errorString A pointer to a CXString for recording the error string
-	 *  if the file was not successfully loaded.
+	 *              @param error A pointer to a enum value recording if there was a problem
+	 *               deserializing the diagnostics.
+	 *               @param errorString A pointer to a CXString for recording the error string
+	 *                     if the file was not successfully loaded.
 	 *  
 	 *  @returns A loaded CXDiagnosticSet if successful, and NULL otherwise.  These
-	 *  diagnostics should be released using clang_disposeDiagnosticSet().
+	 *           diagnostics should be released using clang_disposeDiagnosticSet().
 	 */
 	[Import(Clang.dll), LinkName("clang_loadDiagnostics")] public static extern CXDiagnosticSet LoadDiagnostics(c_char* file, CXLoadDiag_Error* error, CXString* errorString);
 
@@ -112,6 +109,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_disposeDiagnosticSet")] public static extern void DisposeDiagnosticSet(CXDiagnosticSet Diags);
 
 	/** Retrieve the child diagnostics of a CXDiagnostic.
+	 *  
 	 *  This CXDiagnosticSet does not need to be released by
 	 *  clang_disposeDiagnosticSet.
 	 */
@@ -123,55 +121,64 @@ extension Clang
 }
 
 /** Options to control the display of diagnostics.
+ *  
  *  The values in this enum are meant to be combined to customize the
- *  behavior of @c clang_formatDiagnostic().  
+ *  behavior of @c clang_formatDiagnostic(). 
  */
 [AllowDuplicates] enum CXDiagnosticDisplayOptions : c_int
 {
 	/** Display the source-location information where the
 	 *  diagnostic was located.
+	 *  
 	 *  When set, diagnostics will be prefixed by the file, line, and
 	 *  (optionally) column to which the diagnostic refers. For example,
 	 *  
+	 *  
 	 *  ```
-	 *  test.c:28: warning: extra tokens at end of #endif directive
+	 *   test.c:28: warning: extra tokens at end of #endif directive
 	 *  ```
-	 *  This option corresponds to the clang flag @c -fshow-source-location.  
+	 *  
+	 *  This option corresponds to the clang flag @c -fshow-source-location. 
 	 */
 	DisplaySourceLocation = 0x01,
 
 	/** If displaying the source-location information of the
 	 *  diagnostic, also include the column number.
-	 *  This option corresponds to the clang flag @c -fshow-column.  
+	 *  
+	 *  This option corresponds to the clang flag @c -fshow-column. 
 	 */
 	DisplayColumn = 0x02,
 
 	/** If displaying the source-location information of the
 	 *  diagnostic, also include information about source ranges in a
 	 *  machine-parsable format.
+	 *  
 	 *  This option corresponds to the clang flag
-	 *  @c -fdiagnostics-print-source-range-info.  
+	 *   @c -fdiagnostics-print-source-range-info. 
 	 */
 	DisplaySourceRanges = 0x04,
 
 	/** Display the option name associated with this diagnostic, if any.
+	 *  
 	 *  The option name displayed (e.g., -Wconversion) will be placed in brackets
 	 *  after the diagnostic text. This option corresponds to the clang flag
-	 *  @c -fdiagnostics-show-option.  
+	 *   @c -fdiagnostics-show-option. 
 	 */
 	DisplayOption = 0x08,
 
 	/** Display the category number associated with this diagnostic, if any.
+	 *  
 	 *  The category number is displayed within brackets after the diagnostic text.
 	 *  This option corresponds to the clang flag
-	 *  @c -fdiagnostics-show-category=id.  
+	 *   @c -fdiagnostics-show-category=id. 
 	 */
 	DisplayCategoryId = 0x10,
 
 	/** Display the category name associated with this diagnostic, if any.
+	 *  
 	 *  The category name is displayed within brackets after the diagnostic text.
 	 *  This option corresponds to the clang flag
-	 *  @c -fdiagnostics-show-category=name.  
+	 *   @c -fdiagnostics-show-category=name. 
 	 */
 	DisplayCategoryName = 0x20,
 }
@@ -179,14 +186,16 @@ extension Clang
 extension Clang
 {
 	/** Format the given diagnostic in a manner that is suitable for display.
+	 *  
 	 *  This routine will format the given diagnostic to a string, rendering
 	 *  the diagnostic according to the various options given. The
-	 *  @c clang_defaultDiagnosticDisplayOptions() function returns the set of options that most closely mimics the behavior of the clang compiler.
+	 *   @c clang_defaultDiagnosticDisplayOptions() function returns the set of
+	 *  options that most closely mimics the behavior of the clang compiler.
 	 *  
 	 *  @param Diagnostic The diagnostic to print.
 	 *  
 	 *  @param Options A set of options that control the diagnostic display,
-	 *  created by combining @c CXDiagnosticDisplayOptions values. 
+	 *                 created by combining @c CXDiagnosticDisplayOptions values.
 	 *  
 	 *  @returns A new string containing for formatted diagnostic.
 	 */
@@ -195,7 +204,7 @@ extension Clang
 	/** Retrieve the set of display options most similar to the
 	 *  default behavior of the clang compiler.
 	 *  
-	 *  @returns A set of display options suitable for use with @c clang_formatDiagnostic().  
+	 *  @returns A set of display options suitable for use with @c clang_formatDiagnostic(). 
 	 */
 	[Import(Clang.dll), LinkName("clang_defaultDiagnosticDisplayOptions")] public static extern c_uint DefaultDiagnosticDisplayOptions();
 
@@ -204,6 +213,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_getDiagnosticSeverity")] public static extern CXDiagnosticSeverity GetDiagnosticSeverity(CXDiagnostic);
 
 	/** Retrieve the source location of the given diagnostic.
+	 *  
 	 *  This location is where Clang would print the caret ('^') when
 	 *  displaying the diagnostic on the command line.
 	 */
@@ -219,20 +229,21 @@ extension Clang
 	 *  @param Diag The diagnostic to be queried.
 	 *  
 	 *  @param Disable If non-NULL, will be set to the option that disables this
-	 *  diagnostic (if any).
+	 *                 diagnostic (if any).
 	 *  
 	 *  @returns A string that contains the command-line option used to enable this
-	 *  warning, such as "-Wconversion" or "-pedantic".
+	 *           warning, such as "-Wconversion" or "-pedantic".
 	 */
 	[Import(Clang.dll), LinkName("clang_getDiagnosticOption")] public static extern CXString GetDiagnosticOption(CXDiagnostic Diag, CXString* Disable);
 
 	/** Retrieve the category number for this diagnostic.
+	 *  
 	 *  Diagnostics can be categorized into groups along with other, related
 	 *  diagnostics (e.g., diagnostics under the same warning flag). This routine
 	 *  retrieves the category number for the given diagnostic.
 	 *  
 	 *  @returns The number of the category that contains this diagnostic, or zero
-	 *  if this diagnostic is uncategorized.
+	 *           if this diagnostic is uncategorized.
 	 */
 	[Import(Clang.dll), LinkName("clang_getDiagnosticCategory")] public static extern c_uint GetDiagnosticCategory(CXDiagnostic);
 
@@ -241,8 +252,8 @@ extension Clang
 	 *  instead.
 	 *  
 	 *  @param Category A diagnostic category number, as returned by
-	 *  @c clang_getDiagnosticCategory(). 
-	 *   
+	 *                   @c clang_getDiagnosticCategory().
+	 *  
 	 *  @returns The name of the given diagnostic category.
 	 */
 	[Import(Clang.dll), LinkName("clang_getDiagnosticCategoryName")] public static extern CXString GetDiagnosticCategoryName(c_uint Category);
@@ -259,6 +270,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_getDiagnosticNumRanges")] public static extern c_uint GetDiagnosticNumRanges(CXDiagnostic);
 
 	/** Retrieve a source range associated with the diagnostic.
+	 *  
 	 *  A diagnostic's source ranges highlight important elements in the source
 	 *  code. On the command line, Clang displays source ranges by
 	 *  underlining them with '~' characters.
@@ -277,6 +289,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_getDiagnosticNumFixIts")] public static extern c_uint GetDiagnosticNumFixIts(CXDiagnostic Diagnostic);
 
 	/** Retrieve the replacement information for a given fix-it.
+	 *  
 	 *  Fix-its are described in terms of a source range whose contents
 	 *  should be replaced by a string. This approach generalizes over
 	 *  three kinds of operations: removal of source code (the range covers
@@ -292,13 +305,13 @@ extension Clang
 	 *  @param FixIt The zero-based index of the fix-it.
 	 *  
 	 *  @param ReplacementRange The source range whose contents will be
-	 *  replaced with the returned replacement string. Note that source
-	 *  ranges are half-open ranges [a, b), so the source code should be
-	 *  replaced from a and up to (but not including) b.
+	 *                          replaced with the returned replacement string. Note that source
+	 *                          ranges are half-open ranges [a, b), so the source code should be
+	 *                          replaced from a and up to (but not including) b.
 	 *  
 	 *  @returns A string containing text that should be replace the source
-	 *  code indicated by the @c ReplacementRange.  
+	 *           code indicated by the @c ReplacementRange. 
 	 */
 	[Import(Clang.dll), LinkName("clang_getDiagnosticFixIt")] public static extern CXString GetDiagnosticFixIt(CXDiagnostic Diagnostic, c_uint FixIt, CXSourceRange* ReplacementRange);
-
 }
+

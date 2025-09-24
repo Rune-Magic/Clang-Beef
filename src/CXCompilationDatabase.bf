@@ -10,16 +10,18 @@ namespace LibClang;
 /** A compilation database holds all information used to compile files in a
  *  project. For each file in the database, it can be queried for the working
  *  directory or the command line used for the compiler invocation.
- *  Must be freed by @c clang_CompilationDatabase_dispose  
+ *  
+ *  Must be freed by @c clang_CompilationDatabase_dispose 
  */
 class CXCompilationDatabase { private this() {} }
 
 /** Contains the results of a search in the compilation database
+ *  
  *  When searching for the compile command for a file, the compilation db can
  *  return several commands, as the file may have been compiled with
  *  different options in different places of the project. This choice of compile
  *  commands is wrapped in this opaque data structure. It must be freed by
- *  @c clang_CompileCommands_dispose.  
+ *   @c clang_CompileCommands_dispose. 
  */
 class CXCompileCommands { private this() {} }
 
@@ -40,7 +42,8 @@ extension Clang
 	/** Creates a compilation database from the database found in directory
 	 *  buildDir. For example, CMake can output a compile_commands.json which can
 	 *  be used to build the database.
-	 *  It must be freed by @c clang_CompilationDatabase_dispose.  
+	 *  
+	 *  It must be freed by @c clang_CompilationDatabase_dispose. 
 	 */
 	[Import(Clang.dll), LinkName("clang_CompilationDatabase_fromDirectory")] public static extern CXCompilationDatabase CompilationDatabase_FromDirectory(c_char* BuildDir, CXCompilationDatabase_Error* ErrorCode);
 
@@ -49,7 +52,7 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_CompilationDatabase_dispose")] public static extern void CompilationDatabase_Dispose(CXCompilationDatabase);
 
 	/** Find the compile commands used for a file. The compile commands
-	 *  must be freed by @c clang_CompileCommands_dispose.  
+	 *  must be freed by @c clang_CompileCommands_dispose. 
 	 */
 	[Import(Clang.dll), LinkName("clang_CompilationDatabase_getCompileCommands")] public static extern CXCompileCommands CompilationDatabase_GetCompileCommands(CXCompilationDatabase, c_char* CompleteFileName);
 
@@ -66,11 +69,8 @@ extension Clang
 	[Import(Clang.dll), LinkName("clang_CompileCommands_getSize")] public static extern c_uint CompileCommands_GetSize(CXCompileCommands);
 
 	/** Get the I'th CompileCommand for a file
-	 *  Note : 0 
-	 *  <
-	 *  = i 
-	 *  <
-	 *  clang_CompileCommands_getSize(CXCompileCommands)
+	 *  
+	 *  Note : 0 <= i <clang_CompileCommands_getSize(CXCompileCommands)
 	 */
 	[Import(Clang.dll), LinkName("clang_CompileCommands_getCommand")] public static extern CXCompileCommand CompileCommands_GetCommand(CXCompileCommands, c_uint I);
 
@@ -84,10 +84,12 @@ extension Clang
 
 	/** Get the number of arguments in the compiler invocation.
 	 *  
+	 *  
 	 */
 	[Import(Clang.dll), LinkName("clang_CompileCommand_getNumArgs")] public static extern c_uint CompileCommand_GetNumArgs(CXCompileCommand);
 
 	/** Get the I'th argument value in the compiler invocations
+	 *  
 	 *  Invariant :
 	 *  - argument 0 is the compiler executable
 	 */
@@ -104,5 +106,5 @@ extension Clang
 	/** Get the I'th mapped source content for the compiler invocation.
 	 */
 	[Import(Clang.dll), LinkName("clang_CompileCommand_getMappedSourceContent")] public static extern CXString CompileCommand_GetMappedSourceContent(CXCompileCommand, c_uint I);
-
 }
+

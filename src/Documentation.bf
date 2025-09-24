@@ -19,12 +19,13 @@ extension Clang
 {
 	/** Given a cursor that represents a documentable entity (e.g.,
 	 *  declaration), return the associated parsed comment as a
-	 *  @c CXComment_FullComment AST node. 
+	 *   @c CXComment_FullComment AST node.
 	 */
 	[Import(Clang.dll), LinkName("clang_Cursor_getParsedComment")] public static extern CXComment Cursor_GetParsedComment(CXCursor C);
 }
 
-/** Describes the type of the comment AST node (@c CXComment). A comment node can be considered block content (e. g., paragraph), inline content
+/** Describes the type of the comment AST node (@c CXComment). A comment
+ *  node can be considered block content (e. g., paragraph), inline content
  *  (plain text) or neither (the root AST node).
  */
 [AllowDuplicates] enum CXCommentKind : c_int
@@ -39,27 +40,32 @@ extension Clang
 	Text = 1,
 
 	/** A command with word-like arguments that is considered inline content.
-	 *  For example: @c command. 
+	 *  
+	 *  For example: @c command.
 	 */
 	InlineCommand = 2,
 
 	/** HTML start tag with attributes (name-value pairs).  Considered
 	 *  inline content.
+	 *  
 	 *  For example:
 	 *  
 	 *  ```
-	 *  <br> <br /> <a href="http://example.org/">
+	 *   <br> <br /> <a href="http://example.org/">
 	 *  ```
+	 *  
 	 *  
 	 */
 	HTMLStartTag = 3,
 
 	/** HTML end tag.  Considered inline content.
+	 *  
 	 *  For example:
 	 *  
 	 *  ```
-	 *  </a>
+	 *   </a>
 	 *  ```
+	 *  
 	 *  
 	 */
 	HTMLEndTag = 4,
@@ -72,28 +78,38 @@ extension Clang
 	/** A command that has zero or more word-like arguments (number of
 	 *  word-like arguments depends on command name) and a paragraph as an
 	 *  argument.  Block command is block content.
+	 *  
 	 *  Paragraph argument is also a child of the block command.
-	 *  For example: @has 0 word-like arguments and a paragraph argument. 
-	 *  AST nodes of special kinds that parser knows about (e. g., @param command) have their own node kinds.
+	 *  
+	 *  For example: @has 0 word-like arguments and a paragraph argument.
+	 *  
+	 *  AST nodes of special kinds that parser knows about (e. g.,@param
+	 *  command) have their own node kinds.
 	 */
 	BlockCommand = 6,
 
-	/** A @param or  @arg command that describes the function parameter (name, passing direction, description).
-	 *  For example: @param [in] ParamName description. 
+	/** A @param or @arg command that describes the function parameter
+	 *  (name, passing direction, description).
+	 *  
+	 *  For example: @param [in] ParamName description.
 	 */
 	ParamCommand = 7,
 
-	/** A @tparam command that describes a template parameter (name and description).
-	 *  For example: @tparam T description. 
+	/** A @tparam command that describes a template parameter (name and
+	 *  description).
+	 *  
+	 *  For example: @tparam T description.
 	 */
 	TParamCommand = 8,
 
 	/** A verbatim block command (e. g., preformatted code).  Verbatim
 	 *  block has an opening and a closing command and contains multiple lines of
-	 *  text (@c CXComment_VerbatimBlockLine child nodes). 
+	 *  text (@c CXComment_VerbatimBlockLine child nodes).
+	 *  
 	 *  For example:
-	 *  @verbatim aaa
-	 *  @endverbatim 
+	 *   @verbatim
+	 *  aaa
+	 *   @endverbatim
 	 */
 	VerbatimBlockCommand = 9,
 
@@ -140,7 +156,7 @@ extension Clang
 	Anchor = 4,
 }
 
-/** Describes parameter passing direction for @param or  @arg command. 
+/** Describes parameter passing direction for @param or @arg command.
  */
 [AllowDuplicates] enum CXCommentParamPassDirection : c_int
 {
@@ -159,22 +175,19 @@ extension Clang
 
 extension Clang
 {
-	/** 
-	 *  @param Comment AST node of any kind.
+	/** @param Comment AST node of any kind.
 	 *  
 	 *  @returns the type of the AST node.
 	 */
 	[Import(Clang.dll), LinkName("clang_Comment_getKind")] public static extern CXCommentKind Comment_GetKind(CXComment Comment);
 
-	/** 
-	 *  @param Comment AST node of any kind.
+	/** @param Comment AST node of any kind.
 	 *  
 	 *  @returns number of children of the AST node.
 	 */
 	[Import(Clang.dll), LinkName("clang_Comment_getNumChildren")] public static extern c_uint Comment_GetNumChildren(CXComment Comment);
 
-	/** 
-	 *  @param Comment AST node of any kind.
+	/** @param Comment AST node of any kind.
 	 *  
 	 *  @param ChildIdx child index (zero-based).
 	 *  
@@ -182,50 +195,48 @@ extension Clang
 	 */
 	[Import(Clang.dll), LinkName("clang_Comment_getChild")] public static extern CXComment Comment_GetChild(CXComment Comment, c_uint ChildIdx);
 
-	/** A @c CXComment_Paragraph node is considered whitespace if it contains only @c CXComment_Text nodes that are empty or whitespace. 
-	 *  Other AST nodes (except @c CXComment_Paragraph and  @c CXComment_Text) are never considered whitespace.
+	/** A @c CXComment_Paragraph node is considered whitespace if it contains
+	 *  only @c CXComment_Text nodes that are empty or whitespace.
 	 *  
-	 *  @returns non-zero if @c Comment is whitespace. 
+	 *  Other AST nodes (except @c CXComment_Paragraph and @c CXComment_Text) are
+	 *  never considered whitespace.
+	 *  
+	 *  @returns non-zero if @c Comment is whitespace.
 	 */
 	[Import(Clang.dll), LinkName("clang_Comment_isWhitespace")] public static extern c_uint Comment_IsWhitespace(CXComment Comment);
 
-	/** 
-	 *  @returns non-zero if @c Comment is inline content and has a newline immediately following it in the comment text.  Newlines between paragraphs
-	 *  do not count.
+	/** @returns non-zero if @c Comment is inline content and has a newline
+	 *           immediately following it in the comment text.  Newlines between paragraphs
+	 *           do not count.
 	 */
 	[Import(Clang.dll), LinkName("clang_InlineContentComment_hasTrailingNewline")] public static extern c_uint InlineContentComment_HasTrailingNewline(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_Text AST node. 
+	/** @param Comment a @c CXComment_Text AST node.
 	 *  
 	 *  @returns text contained in the AST node.
 	 */
 	[Import(Clang.dll), LinkName("clang_TextComment_getText")] public static extern CXString TextComment_GetText(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_InlineCommand AST node. 
+	/** @param Comment a @c CXComment_InlineCommand AST node.
 	 *  
 	 *  @returns name of the inline command.
 	 */
 	[Import(Clang.dll), LinkName("clang_InlineCommandComment_getCommandName")] public static extern CXString InlineCommandComment_GetCommandName(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_InlineCommand AST node. 
+	/** @param Comment a @c CXComment_InlineCommand AST node.
 	 *  
 	 *  @returns the most appropriate rendering mode, chosen on command
-	 *  semantics in Doxygen.
+	 *           semantics in Doxygen.
 	 */
 	[Import(Clang.dll), LinkName("clang_InlineCommandComment_getRenderKind")] public static extern CXCommentInlineCommandRenderKind InlineCommandComment_GetRenderKind(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_InlineCommand AST node. 
+	/** @param Comment a @c CXComment_InlineCommand AST node.
 	 *  
 	 *  @returns number of command arguments.
 	 */
 	[Import(Clang.dll), LinkName("clang_InlineCommandComment_getNumArgs")] public static extern c_uint InlineCommandComment_GetNumArgs(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_InlineCommand AST node. 
+	/** @param Comment a @c CXComment_InlineCommand AST node.
 	 *  
 	 *  @param ArgIdx argument index (zero-based).
 	 *  
@@ -233,33 +244,26 @@ extension Clang
 	 */
 	[Import(Clang.dll), LinkName("clang_InlineCommandComment_getArgText")] public static extern CXString InlineCommandComment_GetArgText(CXComment Comment, c_uint ArgIdx);
 
-	/** 
-	 *  @param Comment a @c CXComment_HTMLStartTag or  @c CXComment_HTMLEndTag AST node.
+	/** @param Comment a @c CXComment_HTMLStartTag or @c CXComment_HTMLEndTag AST
+	 *                 node.
 	 *  
 	 *  @returns HTML tag name.
 	 */
 	[Import(Clang.dll), LinkName("clang_HTMLTagComment_getTagName")] public static extern CXString HTMLTagComment_GetTagName(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_HTMLStartTag AST node. 
+	/** @param Comment a @c CXComment_HTMLStartTag AST node.
 	 *  
-	 *  @returns non-zero if tag is self-closing (for example, 
-	 *  <
-	 *  br /
-	 *  >
-	 *  ).
+	 *  @returns non-zero if tag is self-closing (for example,<br /> ).
 	 */
 	[Import(Clang.dll), LinkName("clang_HTMLStartTagComment_isSelfClosing")] public static extern c_uint HTMLStartTagComment_IsSelfClosing(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_HTMLStartTag AST node. 
+	/** @param Comment a @c CXComment_HTMLStartTag AST node.
 	 *  
 	 *  @returns number of attributes (name-value pairs) attached to the start tag.
 	 */
 	[Import(Clang.dll), LinkName("clang_HTMLStartTag_getNumAttrs")] public static extern c_uint HTMLStartTag_GetNumAttrs(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_HTMLStartTag AST node. 
+	/** @param Comment a @c CXComment_HTMLStartTag AST node.
 	 *  
 	 *  @param AttrIdx attribute index (zero-based).
 	 *  
@@ -267,8 +271,7 @@ extension Clang
 	 */
 	[Import(Clang.dll), LinkName("clang_HTMLStartTag_getAttrName")] public static extern CXString HTMLStartTag_GetAttrName(CXComment Comment, c_uint AttrIdx);
 
-	/** 
-	 *  @param Comment a @c CXComment_HTMLStartTag AST node. 
+	/** @param Comment a @c CXComment_HTMLStartTag AST node.
 	 *  
 	 *  @param AttrIdx attribute index (zero-based).
 	 *  
@@ -276,22 +279,19 @@ extension Clang
 	 */
 	[Import(Clang.dll), LinkName("clang_HTMLStartTag_getAttrValue")] public static extern CXString HTMLStartTag_GetAttrValue(CXComment Comment, c_uint AttrIdx);
 
-	/** 
-	 *  @param Comment a @c CXComment_BlockCommand AST node. 
+	/** @param Comment a @c CXComment_BlockCommand AST node.
 	 *  
 	 *  @returns name of the block command.
 	 */
 	[Import(Clang.dll), LinkName("clang_BlockCommandComment_getCommandName")] public static extern CXString BlockCommandComment_GetCommandName(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_BlockCommand AST node. 
+	/** @param Comment a @c CXComment_BlockCommand AST node.
 	 *  
 	 *  @returns number of word-like arguments.
 	 */
 	[Import(Clang.dll), LinkName("clang_BlockCommandComment_getNumArgs")] public static extern c_uint BlockCommandComment_GetNumArgs(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_BlockCommand AST node. 
+	/** @param Comment a @c CXComment_BlockCommand AST node.
 	 *  
 	 *  @param ArgIdx argument index (zero-based).
 	 *  
@@ -299,109 +299,105 @@ extension Clang
 	 */
 	[Import(Clang.dll), LinkName("clang_BlockCommandComment_getArgText")] public static extern CXString BlockCommandComment_GetArgText(CXComment Comment, c_uint ArgIdx);
 
-	/** 
-	 *  @param Comment a @c CXComment_BlockCommand or @c CXComment_VerbatimBlockCommand AST node. 
+	/** @param Comment a @c CXComment_BlockCommand or
+	 *                  @c CXComment_VerbatimBlockCommand AST node.
 	 *  
 	 *  @returns paragraph argument of the block command.
 	 */
 	[Import(Clang.dll), LinkName("clang_BlockCommandComment_getParagraph")] public static extern CXComment BlockCommandComment_GetParagraph(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_ParamCommand AST node. 
+	/** @param Comment a @c CXComment_ParamCommand AST node.
 	 *  
 	 *  @returns parameter name.
 	 */
 	[Import(Clang.dll), LinkName("clang_ParamCommandComment_getParamName")] public static extern CXString ParamCommandComment_GetParamName(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_ParamCommand AST node. 
+	/** @param Comment a @c CXComment_ParamCommand AST node.
 	 *  
 	 *  @returns non-zero if the parameter that this AST node represents was found
-	 *  in the function prototype and @c clang_ParamCommandComment_getParamIndex function will return a meaningful value. 
+	 *           in the function prototype and @c clang_ParamCommandComment_getParamIndex function will return a meaningful value.
 	 */
 	[Import(Clang.dll), LinkName("clang_ParamCommandComment_isParamIndexValid")] public static extern c_uint ParamCommandComment_IsParamIndexValid(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_ParamCommand AST node. 
+	/** @param Comment a @c CXComment_ParamCommand AST node.
 	 *  
 	 *  @returns zero-based parameter index in function prototype.
 	 */
 	[Import(Clang.dll), LinkName("clang_ParamCommandComment_getParamIndex")] public static extern c_uint ParamCommandComment_GetParamIndex(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_ParamCommand AST node. 
+	/** @param Comment a @c CXComment_ParamCommand AST node.
 	 *  
 	 *  @returns non-zero if parameter passing direction was specified explicitly in
-	 *  the comment.
+	 *           the comment.
 	 */
 	[Import(Clang.dll), LinkName("clang_ParamCommandComment_isDirectionExplicit")] public static extern c_uint ParamCommandComment_IsDirectionExplicit(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_ParamCommand AST node. 
+	/** @param Comment a @c CXComment_ParamCommand AST node.
 	 *  
 	 *  @returns parameter passing direction.
 	 */
 	[Import(Clang.dll), LinkName("clang_ParamCommandComment_getDirection")] public static extern CXCommentParamPassDirection ParamCommandComment_GetDirection(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_TParamCommand AST node. 
+	/** @param Comment a @c CXComment_TParamCommand AST node.
 	 *  
 	 *  @returns template parameter name.
 	 */
 	[Import(Clang.dll), LinkName("clang_TParamCommandComment_getParamName")] public static extern CXString TParamCommandComment_GetParamName(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_TParamCommand AST node. 
+	/** @param Comment a @c CXComment_TParamCommand AST node.
 	 *  
 	 *  @returns non-zero if the parameter that this AST node represents was found
-	 *  in the template parameter list and
-	 *  @c clang_TParamCommandComment_getDepth and @c clang_TParamCommandComment_getIndex functions will return a meaningful value.
+	 *           in the template parameter list and
+	 *            @c clang_TParamCommandComment_getDepth and
+	 *            @c clang_TParamCommandComment_getIndex functions will return a meaningful
+	 *           value.
 	 */
 	[Import(Clang.dll), LinkName("clang_TParamCommandComment_isParamPositionValid")] public static extern c_uint TParamCommandComment_IsParamPositionValid(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_TParamCommand AST node. 
+	/** @param Comment a @c CXComment_TParamCommand AST node.
 	 *  
 	 *  @returns zero-based nesting depth of this parameter in the template parameter list.
+	 *  
 	 *  For example,
 	 *  
 	 *  ```
-	 *    template<typename C, template<typename T> class TT>
-	 *    void test(TT<int> aaa);
+	 *       template<typename C, template<typename T> class TT>
+	 *       void test(TT<int> aaa);
 	 *  ```
+	 *  
 	 *  for C and TT nesting depth is 0,
 	 *  for T nesting depth is 1.
 	 */
 	[Import(Clang.dll), LinkName("clang_TParamCommandComment_getDepth")] public static extern c_uint TParamCommandComment_GetDepth(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_TParamCommand AST node. 
+	/** @param Comment a @c CXComment_TParamCommand AST node.
 	 *  
 	 *  @returns zero-based parameter index in the template parameter list at a
-	 *  given nesting depth.
+	 *           given nesting depth.
+	 *  
 	 *  For example,
 	 *  
 	 *  ```
-	 *    template<typename C, template<typename T> class TT>
-	 *    void test(TT<int> aaa);
+	 *       template<typename C, template<typename T> class TT>
+	 *       void test(TT<int> aaa);
 	 *  ```
+	 *  
 	 *  for C and TT nesting depth is 0, so we can ask for index at depth 0:
 	 *  at depth 0 C's index is 0, TT's index is 1.
+	 *  
 	 *  For T nesting depth is 1, so we can ask for index at depth 0 and 1:
 	 *  at depth 0 T's index is 1 (same as TT's),
 	 *  at depth 1 T's index is 0.
 	 */
 	[Import(Clang.dll), LinkName("clang_TParamCommandComment_getIndex")] public static extern c_uint TParamCommandComment_GetIndex(CXComment Comment, c_uint Depth);
 
-	/** 
-	 *  @param Comment a @c CXComment_VerbatimBlockLine AST node. 
+	/** @param Comment a @c CXComment_VerbatimBlockLine AST node.
 	 *  
 	 *  @returns text contained in the AST node.
 	 */
 	[Import(Clang.dll), LinkName("clang_VerbatimBlockLineComment_getText")] public static extern CXString VerbatimBlockLineComment_GetText(CXComment Comment);
 
-	/** 
-	 *  @param Comment a @c CXComment_VerbatimLine AST node. 
+	/** @param Comment a @c CXComment_VerbatimLine AST node.
 	 *  
 	 *  @returns text contained in the AST node.
 	 */
@@ -409,79 +405,53 @@ extension Clang
 
 	/** Convert an HTML tag AST node to string.
 	 *  
-	 *  @param Comment a @c CXComment_HTMLStartTag or  @c CXComment_HTMLEndTag AST node.
+	 *  @param Comment a @c CXComment_HTMLStartTag or @c CXComment_HTMLEndTag AST
+	 *                 node.
 	 *  
 	 *  @returns string containing an HTML tag.
 	 */
 	[Import(Clang.dll), LinkName("clang_HTMLTagComment_getAsString")] public static extern CXString HTMLTagComment_GetAsString(CXComment Comment);
 
 	/** Convert a given full parsed comment to an HTML fragment.
+	 *  
 	 *  Specific details of HTML layout are subject to change.  Don't try to parse
 	 *  this HTML back into an AST, use other APIs instead.
+	 *  
 	 *  Currently the following CSS classes are used:
+	 *  @li "para-brief" for
+	 *  ` and equivalent commands;`
 	 *  
-	 *  @li "para-brief" for 
-	 *   and equivalent commands;
+	 *  @li "para-returns" for @returns paragraph and equivalent commands;
+	 *      @li "word-returns" for the "Returns" word in @returns paragraph.
 	 *  
-	 *  @li "para-returns" for @returns paragraph and equivalent commands; 
-	 *  @li "word-returns" for the "Returns" word in @returns paragraph. 
-	 *  Function argument documentation is rendered as a 
-	 *  <
-	 *  dl
-	 *  >
-	 *  list with arguments
+	 *  Function argument documentation is rendered as a <dl> list with arguments
 	 *  sorted in function prototype order.  CSS classes used:
+	 *  @li "param-name-index-NUMBER" for parameter name (<dt> );
+	 *      @li "param-descr-index-NUMBER" for parameter description (<dd> );
+	 *      @li "param-name-index-invalid" and "param-descr-index-invalid" are used if
+	 *      parameter index is invalid.
 	 *  
-	 *  @li "param-name-index-NUMBER" for parameter name (
-	 *  <
-	 *  dt
-	 *  >
-	 *  );
-	 *  
-	 *  @li "param-descr-index-NUMBER" for parameter description (
-	 *  <
-	 *  dd
-	 *  >
-	 *  );
-	 *  
-	 *  @li "param-name-index-invalid" and "param-descr-index-invalid" are used if
-	 *  parameter index is invalid.
-	 *  Template parameter documentation is rendered as a 
-	 *  <
-	 *  dl
-	 *  >
-	 *  list with
+	 *  Template parameter documentation is rendered as a <dl> list with
 	 *  parameters sorted in template parameter list order.  CSS classes used:
+	 *  @li "tparam-name-index-NUMBER" for parameter name (<dt> );
+	 *      @li "tparam-descr-index-NUMBER" for parameter description (<dd> );
+	 *      @li "tparam-name-index-other" and "tparam-descr-index-other" are used for
+	 *      names inside template template parameters;
+	 *      @li "tparam-name-index-invalid" and "tparam-descr-index-invalid" are used if
+	 *      parameter position is invalid.
 	 *  
-	 *  @li "tparam-name-index-NUMBER" for parameter name (
-	 *  <
-	 *  dt
-	 *  >
-	 *  );
-	 *  
-	 *  @li "tparam-descr-index-NUMBER" for parameter description (
-	 *  <
-	 *  dd
-	 *  >
-	 *  );
-	 *  
-	 *  @li "tparam-name-index-other" and "tparam-descr-index-other" are used for
-	 *  names inside template template parameters;
-	 *  
-	 *  @li "tparam-name-index-invalid" and "tparam-descr-index-invalid" are used if
-	 *  parameter position is invalid.
-	 *  
-	 *  @param Comment a @c CXComment_FullComment AST node. 
+	 *  @param Comment a @c CXComment_FullComment AST node.
 	 *  
 	 *  @returns string containing an HTML fragment.
 	 */
 	[Import(Clang.dll), LinkName("clang_FullComment_getAsHTML")] public static extern CXString FullComment_GetAsHTML(CXComment Comment);
 
 	/** Convert a given full parsed comment to an XML document.
+	 *  
 	 *  A Relax NG schema for the XML can be found in comment-xml-schema.rng file
 	 *  inside clang source tree.
 	 *  
-	 *  @param Comment a @c CXComment_FullComment AST node. 
+	 *  @param Comment a @c CXComment_FullComment AST node.
 	 *  
 	 *  @returns string containing an XML document.
 	 */
@@ -496,50 +466,54 @@ class CXAPISet { private this() {} }
 
 extension Clang
 {
-	/** Traverses the translation unit to create a @c CXAPISet. 
-	 *   
-	 *  @param tu is the @c CXTranslationUnit to build the  @c CXAPISet for. 
+	/** Traverses the translation unit to create a @c CXAPISet.
+	 *  
+	 *  @param tu is the @c CXTranslationUnit to build the @c CXAPISet for.
 	 *  
 	 *  @param out_api is a pointer to the output of this function. It is needs to be
-	 *  disposed of by calling clang_disposeAPISet.
+	 *                 disposed of by calling clang_disposeAPISet.
 	 *  
 	 *  @returns Error code indicating success or failure of the APISet creation.
 	 */
 	[Import(Clang.dll), LinkName("clang_createAPISet")] public static extern CXErrorCode CreateAPISet(CXTranslationUnit tu, CXAPISet* out_api);
 
 	/** Dispose of an APISet.
-	 *  The provided @c CXAPISet can not be used after this function is called. 
+	 *  
+	 *  The provided @c CXAPISet can not be used after this function is called.
 	 */
 	[Import(Clang.dll), LinkName("clang_disposeAPISet")] public static extern void DisposeAPISet(CXAPISet api);
 
 	/** Generate a single symbol symbol graph for the given USR. Returns a null
-	 *  string if the associated symbol can not be found in the provided @c CXAPISet. 
-	 *  The output contains the symbol graph as well as some additional information about related symbols.
+	 *  string if the associated symbol can not be found in the provided @c CXAPISet.
+	 *  
+	 *  The output contains the symbol graph as well as some additional information
+	 *  about related symbols.
 	 *  
 	 *  @param usr is a string containing the USR of the symbol to generate the
-	 *  symbol graph for.
+	 *             symbol graph for.
 	 *  
-	 *  @param api the @c CXAPISet to look for the symbol in. 
+	 *  @param api the @c CXAPISet to look for the symbol in.
 	 *  
 	 *  @returns a string containing the serialized symbol graph representation for
-	 *  the symbol being queried or a null string if it can not be found in the
-	 *  APISet.
+	 *           the symbol being queried or a null string if it can not be found in the
+	 *           APISet.
 	 */
 	[Import(Clang.dll), LinkName("clang_getSymbolGraphForUSR")] public static extern CXString GetSymbolGraphForUSR(c_char* usr, CXAPISet api);
 
 	/** Generate a single symbol symbol graph for the declaration at the given
 	 *  cursor. Returns a null string if the AST node for the cursor isn't a
 	 *  declaration.
+	 *  
 	 *  The output contains the symbol graph as well as some additional information
 	 *  about related symbols.
 	 *  
 	 *  @param cursor the declaration for which to generate the single symbol symbol
-	 *  graph.
+	 *                graph.
 	 *  
 	 *  @returns a string containing the serialized symbol graph representation for
-	 *  the symbol being queried or a null string if it can not be found in the
-	 *  APISet.
+	 *           the symbol being queried or a null string if it can not be found in the
+	 *           APISet.
 	 */
 	[Import(Clang.dll), LinkName("clang_getSymbolGraphForCursor")] public static extern CXString GetSymbolGraphForCursor(CXCursor cursor);
-
 }
+
